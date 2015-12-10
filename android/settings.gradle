@@ -1,0 +1,3 @@
+rootProject.name = 'WM_ReactNative_Android'
+
+include ':app'
