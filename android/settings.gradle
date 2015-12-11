@@ -1,3 +1,4 @@
 rootProject.name = 'WM_ReactNative_Android'
 
-include ':app'
+include ':app', ':react-native-dialogs'
+project(':react-native-dialogs').projectDir = file('../node_modules/react-native-dialogs/android')

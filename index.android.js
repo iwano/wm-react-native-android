@@ -15,12 +15,28 @@ var {
   Image
 } = React;
 
+var DialogAndroid = require('react-native-dialogs');
+
 var WM_ReactNative_Android = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       email: '',
       password: ''
     };
+  },
+
+  _onPressButton: function () {
+    this._showDialog();
+  },
+
+  _showDialog: function () {
+    var dialog = new DialogAndroid();
+    dialog.set({
+      title: 'You tried to log in',
+      content: 'Yeap you did',
+      positiveText: 'Ok'
+    });
+    dialog.show();
   },
 
   render: function() {
