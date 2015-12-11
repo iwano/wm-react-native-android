@@ -5,6 +5,7 @@
 'use strict';
 
 var React = require('react-native');
+
 var {
   AppRegistry,
   StyleSheet,
@@ -15,7 +16,7 @@ var {
   Image
 } = React;
 
-var DialogAndroid = require('react-native-dialogs');
+var DataStore = require('./android/app/src/stores/DataStore');
 
 var WM_ReactNative_Android = React.createClass({
   getInitialState: function () {
@@ -25,18 +26,15 @@ var WM_ReactNative_Android = React.createClass({
     };
   },
 
-  _onPressButton: function () {
-    this._showDialog();
+  _login: function () {
+    DataStore.login({
+      email: this.state.email,
+      password: this.state.password
+    });
   },
 
-  _showDialog: function () {
-    var dialog = new DialogAndroid();
-    dialog.set({
-      title: 'You tried to log in',
-      content: 'Yeap you did',
-      positiveText: 'Ok'
-    });
-    dialog.show();
+  _onPressButton: function () {
+    this._login();
   },
 
   render: function() {
@@ -62,14 +60,16 @@ var WM_ReactNative_Android = React.createClass({
         </View>
         <View style={styles.loginForm}>
           <TextInput
-            onChangeText={(text) => this.setState({email: !!text})}
+            ref="Email"
+            onChangeText={(text) => this.setState({email: text})}
             style={styles.input}
             type="email"
             placeholder="email"
             keyboardType="email-address"
           />
           <TextInput
-            onChangeText={(text) => this.setState({password: !!text})}
+            ref={(c) => this._password = c}
+            onChangeText={(text) => this.setState({password: text})}
             style={styles.input}
             placeholder="password"
             password={true}
