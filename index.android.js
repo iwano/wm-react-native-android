@@ -40,17 +40,14 @@ var WM_ReactNative_Android = React.createClass({
         </View>
         <View style={styles.loginForm}>
           <TextInput
-            onChangeText={(text) => {
-              debugger;
-              this.setState({email: text})
-            }}
+            onChangeText={(text) => this.setState({email: text})}
             style={styles.input}
             type="email"
             placeholder="email"
             keyboardType="email-address"
           />
           <TextInput
-            onChangeText={(text) => this.setState({email: text})}
+            onChangeText={(text) => this.setState({password: text})}
             style={styles.input}
             placeholder="password"
             password={true}
