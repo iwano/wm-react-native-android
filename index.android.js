@@ -27,8 +27,14 @@ var WM_ReactNative_Android = React.createClass({
     let loginButton = null;
     if (this.state.email && this.state.password) {
       loginButton = <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple()} onPress={this._onPressButton}>
-        <View style={{backgroundColor: 'orange', padding: 10}}>
-          <Text style={{textAlign: 'center'}}>Login</Text>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Login</Text>
+        </View>
+      </TouchableNativeFeedback>
+    } else {
+      loginButton = <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple()} onPress={this._onPressButton}>
+        <View style={[styles.button, { opacity: 0 }]}>
+          <Text style={styles.buttonText}>Login</Text>
         </View>
       </TouchableNativeFeedback>
     }
@@ -40,20 +46,20 @@ var WM_ReactNative_Android = React.createClass({
         </View>
         <View style={styles.loginForm}>
           <TextInput
-            onChangeText={(text) => this.setState({email: text})}
+            onChangeText={(text) => this.setState({email: !!text})}
             style={styles.input}
             type="email"
             placeholder="email"
             keyboardType="email-address"
           />
           <TextInput
-            onChangeText={(text) => this.setState({password: text})}
+            onChangeText={(text) => this.setState({password: !!text})}
             style={styles.input}
             placeholder="password"
             password={true}
           />
-        {loginButton}
         </View>
+        {loginButton}
       </View>
     );
   }
@@ -95,8 +101,16 @@ var styles = StyleSheet.create({
   input: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 2
+    borderWidth: 1
+  },
+  button: {
+    backgroundColor: 'orange',
+    padding: 10
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: 'bold'
   }
 });
 
