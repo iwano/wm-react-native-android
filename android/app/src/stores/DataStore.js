@@ -3,7 +3,7 @@
 var React = require('react-native');
 var DialogAndroid = require('react-native-dialogs');
 
-var BASE_URL = 'http://10.0.3.2:8080';
+var BASE_URL = 'http://192.168.56.1:8080';
 
 function _showDialog (title = '', content = '', positiveText = 'Ok', negativeText = null) {
   var dialog = new DialogAndroid();
@@ -21,9 +21,7 @@ var DataStore = {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'localhost:8080'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         userEmail: user.email,
