@@ -10,21 +10,53 @@ var {
   StyleSheet,
   Text,
   View,
+  TextInput,
+  TouchableNativeFeedback,
+  Image
 } = React;
 
 var WM_ReactNative_Android = React.createClass({
+  getInitialState: function() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+
   render: function() {
+    let loginButton = null;
+    if (this.state.email && this.state.password) {
+      loginButton = <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple()} onPress={this._onPressButton}>
+        <View style={{backgroundColor: 'orange', padding: 10}}>
+          <Text style={{textAlign: 'center'}}>Login</Text>
+        </View>
+      </TouchableNativeFeedback>
+    }
     return (
+
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+        <View style={styles.backgroundImageWrapper}>
+          <Image source={require('./android/app/img/welcome_background.png')} style={styles.backgroundImage} />
+        </View>
+        <View style={styles.loginForm}>
+          <TextInput
+            onChangeText={(text) => {
+              debugger;
+              this.setState({email: text})
+            }}
+            style={styles.input}
+            type="email"
+            placeholder="email"
+            keyboardType="email-address"
+          />
+          <TextInput
+            onChangeText={(text) => this.setState({email: text})}
+            style={styles.input}
+            placeholder="password"
+            password={true}
+          />
+        {loginButton}
+        </View>
       </View>
     );
   }
@@ -34,8 +66,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   },
   welcome: {
     fontSize: 20,
@@ -47,6 +78,29 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  loginForm: {
+    marginTop: 100,
+    backgroundColor: 'white'
+  },
+  backgroundImageWrapper: {
+    flex: 1,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0
+  },
+  backgroundImage: {
+    flex: 1,
+    alignSelf: 'center',
+    resizeMode: 'contain'
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 2
+  }
 });
 
 AppRegistry.registerComponent('WM_ReactNative_Android', () => WM_ReactNative_Android);
